@@ -1,7 +1,7 @@
 use tao::event::{Event, WindowEvent};
 use tao::event_loop::{ControlFlow, EventLoop};
 use tao::window::WindowBuilder;
-use wry::{WebViewBuilder, WebViewBuilderExtWindows};
+use wry::WebViewBuilder;
 
 use crate::views::builder::Builder;
 
@@ -9,6 +9,7 @@ mod views;
 
 fn main() {
     let event_loop = EventLoop::new();
+    
     let window = WindowBuilder::new()
         .with_title("ScraPiP")
         .with_inner_size(tao::dpi::LogicalSize::new(900.0, 650.0))
@@ -24,10 +25,29 @@ fn main() {
         .set_script("<script>alert('Home page loaded');</script>")
         .build();
 
+
+    #[cfg(target_os = "linux")]
+    let _webview = {
+        use gtk::prelude::*;
+        use tao::platform::unix::WindowExtUnix;
+        use wry::WebViewBuilderExtUnix;
+
+        let vbox = window.default_vbox().unwrap();
+        let fixed = gtk::Fixed::new();
+        fixed.show_all();
+        vbox.pack_start(&fixed, true, true, 0);
+        
+        WebViewBuilder::new()
+            .with_html(&home_view)
+            .with_devtools(false)
+            .build_gtk(&fixed)
+            .unwrap()
+    };
+
+    #[cfg(not(target_os = "linux"))]
     let _webview = WebViewBuilder::new()
-        .with_html(home_view)
+        .with_html(&home_view)
         .with_devtools(false)
-        .with_browser_extensions_enabled(false)
         .build(&window)
         .unwrap();
 

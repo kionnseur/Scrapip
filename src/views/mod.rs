@@ -33,3 +33,15 @@ impl Into<String> for Views {
     format!("{}{}{}{}{}", theme, header, body, footer, scripts)
     }
 }
+
+impl Into<String> for &Views {
+    fn into(self) -> String {
+    let header = &self.header;
+    let body = &self.body;
+    let footer = &self.footer;
+    let theme = &self.theme;
+    let scripts = &self.scripts;
+
+    format!("{}{}{}{}{}", theme, header, body, footer, scripts)
+    }
+}
