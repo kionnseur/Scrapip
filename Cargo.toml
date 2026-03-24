@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+chrono = "0.4.44"
 gtk = "0.18.2"
+rusqlite = "0.39.0"
+serde = { version = "1.0.228", features = ["derive"] }
 tao = "0.35.0"
+uuid = { version = "1.22.0", features = ["v4"] }
 wry = { version = "0.55.0", features = ["linux-body"] }

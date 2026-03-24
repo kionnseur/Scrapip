@@ -8,11 +8,10 @@ pub trait Builder {
     fn set_style(&mut self, theme: &str) -> &mut Self;
     fn set_script(&mut self, scripts: &str) -> &mut Self;
     fn build(&self) -> Self::Output;
-    
 }
 
 #[derive(Default)]
-pub struct ViewsBuilder{
+pub struct ViewsBuilder {
     header: Option<String>,
     body: Option<String>,
     footer: Option<String>,
@@ -55,6 +54,6 @@ impl Builder for ViewsBuilder {
             self.footer.clone().expect("Footer is required"),
             self.style.clone().expect("Style is required"),
             self.script.clone().expect("Script is required"),
-         )
+        )
     }
 }
