@@ -6,4 +6,4 @@ edition = "2024"
 [dependencies]
 gtk = "0.18.2"
 tao = "0.35.0"
-wry = { version = "0.54.4", features = ["linux-body"] }
+wry = { version = "0.55.0", features = ["linux-body"] }
